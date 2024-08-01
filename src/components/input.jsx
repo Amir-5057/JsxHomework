@@ -1,7 +1,8 @@
 import React from "react";
 
 export const Input = ({inputText,  inputPlaceholder, 
-    inputType, inputId, inputName, errorText, inputPattern }) => {
+    inputType, inputId, inputName, errorText, inputPattern,
+    inputValue, inputChange }) => {
     return (
         <label className="input-wrapper" htmlFor="username">
             {inputText}
@@ -12,6 +13,8 @@ export const Input = ({inputText,  inputPlaceholder,
                 id={inputId}
                 placeholder={inputPlaceholder}
                 pattern={inputPattern}
+                value={inputValue}
+                onChange={(event) => inputChange(event.target.value)}
             />
             <span id="error-message">
                 {errorText}
