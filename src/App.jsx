@@ -19,27 +19,27 @@ const App = () => {
 
     },
     {
-      path: 'Step_One',
+      path: '/step-One',
       element: <StepOne />,
 
     },
     {
-      path: 'Step_Two',
+      path: '/step-Two',
       element: <StepTwo />,
 
     },
     {
-      path: 'Step-Three',
+      path: '/step-Three',
       element: <StepThree />,
 
     },
     {
-      path: 'Step-Four',
+      path: '/step-Four',
       element: <StepFour />,
 
     },
     {
-      path: 'Thanks',
+      path: '/Thanks',
       element: <Thanks />,
 
     }

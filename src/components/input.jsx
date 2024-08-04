@@ -2,9 +2,9 @@ import React from "react";
 
 export const Input = ({inputText,  inputPlaceholder, 
     inputType, inputId, inputName, errorText, inputPattern,
-    inputValue, inputChange }) => {
+    inputValue, inputChange, hasError, }) => {
     return (
-        <label className="input-wrapper" htmlFor="username">
+        <label className={`input-wrapper _errorv ${hasError && '_error'}`} htmlFor="username">
             {inputText}
             <input
                 required
@@ -16,9 +16,7 @@ export const Input = ({inputText,  inputPlaceholder,
                 value={inputValue}
                 onChange={(event) => inputChange(event.target.value)}
             />
-            <span id="error-message">
-                {errorText}
-            </span>
+            { hasError && <span id="error-message">{errorText}</span>}
         </label>
         
     )
