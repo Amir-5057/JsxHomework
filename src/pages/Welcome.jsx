@@ -69,7 +69,9 @@ const Welcome = () => {
     <div className="container">
       <div className="wrapper">
         <div className="welcome">
-          <Header />
+          <Header headerText={'Добро пожаловать на курс по JS'}
+          headerType={'h1'}/>
+          
           <form className="welcome__form">
             <Input
               inputText="Введите ваше имя"

@@ -1,59 +1,78 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { AnswerImg } from "../components/answerImg";
+import { useNavigate } from "react-router-dom";
+import { ProgressBar } from "../components/ProgressBar";
+import { Header } from "../components/header";
+import { Button } from "../components/button";
+
 
 const StepThree = () => {
+
+  const variants = [
+    {
+      variantImg: "./img/hearts.png",
+      variantId: "variant-1",
+      variantText: "Думаю будет весело",
+      variantAlt: "laugh",
+    },
+    {
+      variantImg: "./img/hearts.png",
+      variantId: "variant-2",
+      variantText: "Мне понравиться",
+      variantAlt: "hearts",
+    },
+    {
+      variantImg: "./img/smirk.png",
+      variantId: "variant-3",
+      variantText: "Уверенный в себе",
+      variantAlt: "smirk",
+    },
+    {
+      variantImg: "./img/fright.png",
+      variantId: "variant-4",
+      variantText: "Страх перед обучением",
+      variantAlt: "fright",
+    },
+  ];
+
+  const [variantImg, setVariantImg] = useState(null);
+  const [buttonError, setButtonError] = useState(true)
+  const navigate = useNavigate();
+
+
+
+  useEffect(() => {
+    if (variantImg === null) {
+      localStorage.setItem("text", "")
+      setButtonError(true)
+    } else {
+      localStorage.setItem("text", JSON.stringify(variantImg))
+      setButtonError(false)
+    }
+  }, [variantImg])
   return (
     <div className="container">
       <div className="wrapper">
         <div className="emoji-quiz">
-          <div className="indicator">
-            <div className="indicator__text">
-              <span className="indicator__description">
-                Скидка за прохождение опроса:
-              </span>
-              <span className="indicator__value">15%</span>
-            </div>
-            <div className="indicator__progressbar">
-              <div className="indicator__unit indicator__unit-1 _active"></div>
-              <div className="indicator__unit indicator__unit-2 _active"></div>
-              <div className="indicator__unit indicator__unit-3"></div>
-              <div className="indicator__unit indicator__unit-4"></div>
-            </div>
-          </div>
+          <ProgressBar currentStep={3} />
           <div className="question">
-            <h2>3. Занимательный вопрос</h2>
+            <Header headerText={'Какие у вас впечатление после курса'}
+              headerType={'h2'} />
             <ul className="emoji-variants">
-              <li className="variant-wrapper">
-                <input required type="radio" name="variant" id="variant-1" />
-                <label htmlFor="variant-1">
-                  <img src="./img/laugh.png" alt="laugh" />
-                  <p>Ваш ответ 1</p>
-                </label>
-              </li>
-              <li className="variant-wrapper">
-                <input required type="radio" name="variant" id="variant-2" />
-                <label htmlFor="variant-2">
-                  <img src="./img/hearts.png" alt="hearts" />
-                  <p>Ваш ответ 2</p>
-                </label>
-              </li>
-              <li className="variant-wrapper">
-                <input required type="radio" name="variant" id="variant-3" />
-                <label htmlFor="variant-3">
-                  <img src="./img/smirk.png" alt="smirk" />
-                  <p>Ваш ответ 3</p>
-                </label>
-              </li>
-              <li className="variant-wrapper">
-                <input required type="radio" name="variant" id="variant-4" />
-                <label htmlFor="variant-4">
-                  <img src="./img/fright.png" alt="fright" />
-                  <p>Ваш ответ 4</p>
-                </label>
-              </li>
+              {variants.map((elem) => (
+                <AnswerImg
+                  key={elem.variantId}
+                  answerAlt={elem.variantAlt}
+                  answerId={elem.variantId}
+                  answerImg={elem.variantImg}
+                  answerText={elem.variantText}
+                  answerChange={() => setVariantImg(elem.variantText)}
+                />
+              ))};
+
+
             </ul>
-            <button type="button" disabled id="next-btn">
-              Далее
-            </button>
+            <Button buttonClick={() => navigate('/step-four')} isDisabled={buttonError} />
           </div>
         </div>
       </div>
